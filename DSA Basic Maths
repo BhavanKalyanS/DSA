@@ -1,0 +1,174 @@
+Count Digits Code ;
+
+class Solution {
+    static int evenlyDivides(int n) {
+        int count = 0;
+        int N = n;
+
+        while (n > 0) {
+            int digit = n % 10;
+            if (digit != 0 && N % digit == 0) {
+                count=count+1;
+            }
+            n = n/10;
+        }
+
+        return count; 
+    }
+}
+
+Reverse a Number ;
+
+class Solution {
+    public int reverse(int x) {
+        int res = 0;
+        while (x != 0) {
+            int digit = x % 10;
+            x /= 10;
+            if (res > Integer.MAX_VALUE / 10 || (res == Integer.MAX_VALUE / 10 && digit > 7)) {
+                return 0;
+            }
+            if (res < Integer.MIN_VALUE / 10 || (res == Integer.MIN_VALUE / 10 && digit < -8)) {
+                return 0;
+            }
+            res = res * 10 + digit;
+        }
+        return res;
+    }
+}
+
+Check a Palindrome ;
+
+class Solution {
+    public boolean isPalindrome(int x) {
+        if(x < 0 || (x % 10==0 && x !=0 )){
+            return false;
+        }
+        int orgi=x;
+        int revN=0;
+        while(x>0)
+        {
+            int lastDig=x%10;
+            x=x/10;
+            revN=(revN*10)+lastDig;
+        }
+        return revN==orgi;
+
+    }
+}
+
+GCD or HCF ;
+
+
+// User function Template for Java
+
+class Solution {
+    public static int[] lcmAndGcd(int a, int b) {
+        int oriA=a;
+        int oriB=b;
+        
+        while(a>0 && b>0)
+        {
+            if(a>b){
+                a=a%b;
+            }
+            else{
+                b=b%a;
+            }
+        }
+        int gcd;
+        if(a==0){
+            gcd = b;
+        }
+        else{
+            gcd = a;
+        }
+        int lcm=(oriA*oriB)/gcd;
+        
+        return new int[]{lcm,gcd};
+    }
+}
+
+Armstrong Number ;
+
+import java.util.*;
+import java.lang.Math;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int num = N;
+        int as = 0;
+        int k = String.valueOf(num).length();   
+        while (N > 0) {
+            int lastDig = N % 10;
+            as = as + Math.pow(lastDig, k); 
+            
+            N = N / 10;
+        }
+        if (as == num) {
+            System.out.println("true");
+        } else {
+            System.out.println("false");
+        }
+
+        sc.close();
+    }
+}
+
+Print All Divisors ; 
+
+// User function Template for Java
+class Solution {
+    public static int sumOfDivisors(int n) {
+        int sum=0;
+        for(int i=1;i<=n;i++)
+        {
+            for(int j=1;j<=i;j++)
+            {
+            if(i%j==0)
+            {
+                sum=sum+j;
+            }
+        }
+        }    
+        return sum;
+    }
+}
+
+Check For Prime ;
+
+
+class Solution {
+    static int minJumps(int[] arr) {
+        int n = arr.length;
+        
+        if (n <= 1) {
+            return 0;
+        }
+        if (arr[0] == 0) {
+            return -1;
+        }        
+        int jumps = 0;
+        int currentEnd = 0;
+        int farthest = 0;       
+        for (int i = 0; i < n; i++) {
+            farthest = Math.max(farthest, i + arr[i]);
+            
+            if (i == currentEnd) {
+                jumps++;
+                
+                currentEnd = farthest;
+                
+                if (currentEnd >= n - 1) {
+                    return jumps;
+                }
+            }   
+            if (i >= farthest) {
+                break;
+            }
+        }        
+        return -1;
+    }
+}
