@@ -1,0 +1,122 @@
+Introduction to Bit Manipulation ;
+
+class Solution {
+    static void bitManipulation(int num, int i) {
+        // code here
+        i = i-1;
+        int ithBit = (num>>i)&1;
+        int numWithSetBit =( num | (1<<i));
+        int clearIthBit = (num & ~(1<<i));
+        System.out.print(ithBit+" "+numWithSetBit+" "+clearIthBit);
+    }
+}
+
+	
+Check if the i-th bit is set or not ;
+
+
+class CheckBit {
+    static boolean checkKthBit(int n, int k) {
+        return (n & (1 << k)) !=0;
+
+    }
+}
+
+Check if a number is odd or not ;
+
+class Solution {
+    static boolean isEven(int n) {
+        return (n & 1)==0 ? true:false;
+    }
+}
+
+Count the number of set bits ;
+
+//User function Template for Java
+
+class Solution {
+    
+    public static int countSetBits(int n) {
+        int count = 0;
+        
+        for (int i = 0; (1 << i) <= n; i++) {
+            int cycleLength = 1 << (i + 1); // cycleLength = 2^(i+1)
+            
+            int completeCycles = n / cycleLength;
+            
+            count += completeCycles * (cycleLength / 2);
+            
+            int remainder = n % cycleLength;
+            if (remainder >= (cycleLength / 2)) {
+                count += remainder - (cycleLength / 2) + 1;
+            }
+        }
+        
+        return count;
+    }
+
+ 
+}
+
+	
+Set/Unset the rightmost unset bit ;
+
+class Solution {
+    static int setBit(int n) {
+        return n|(n+1);
+    }
+}
+
+	
+Swap two numbers ;
+
+
+
+//User function Template for Java
+
+class Solution {
+    static List<Integer> get(int a, int b) {
+        a = a ^ b; 
+        b = a ^ b; 
+        a = a ^ b; 
+        
+       
+        List<Integer> result = new ArrayList<>();
+        result.add(a);
+        result.add(b);
+        
+        return result;
+    }
+}
+
+Divide two integers without using multiplication, division and mod operator ;
+
+class Solution {
+    public int divide(int dividend, int divisor) {
+        if (dividend == Integer.MIN_VALUE && divisor == -1) {
+            return Integer.MAX_VALUE;  
+        }
+
+        boolean isNegative = (dividend < 0) != (divisor < 0);  
+
+        long absDividend = Math.abs((long) dividend);
+        long absDivisor = Math.abs((long) divisor);
+
+        int result = 0;
+        
+        while (absDividend >= absDivisor) {
+            long tempDivisor = absDivisor, multiple = 1;
+            
+            while (absDividend >= (tempDivisor << 1)) {
+                tempDivisor <<= 1;
+                multiple <<= 1;
+            }
+            
+            // Subtract the multiple of divisor from the dividend
+            absDividend -= tempDivisor;
+            result += multiple;
+        }
+
+        return isNegative ? -result : result;
+    }
+}
